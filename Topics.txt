@@ -1,4 +1,4 @@
-LEARNING LINUX THE HARD WAY - ENLIGHTENMENT WITH GENTOO
+LEARNING LINUX THE HARD WAY
 
 General notes:
 
@@ -74,6 +74,7 @@ TOPICS
  - writing Python-Bindings for famous C/C++ Library (e.g. FFTW) with SWIG
  - distributing a Python Library as Ebuild (e.g. pyfftw) via portage
  - layman and popular overlays (science etc.)
+ - sed and friends
  
 8. Scientific Computing
  - OpenMPI Installation
