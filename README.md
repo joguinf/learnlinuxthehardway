@@ -1,11 +1,5 @@
-#Learn Linux the hard way
+# Learn Linux the Hard Way
 
-Planning of an university course teaching in-depth knowledge about 
-the internals of the Linux operating system.
+Planning of an university course teaching in-depth knowledge about the internals of the Linux operating system.
 
-##Link collection
-
-- http://ritfloss.readthedocs.org/en/latest/index.html
-- https://github.com/ralphbean/posse/
-
-- http://wiki.osdev.org/Main_Page
+For information about the course and the course material, see the [Wiki](https://github.com/moschlar/learnlinuxthehardway/wiki) here on Github.
