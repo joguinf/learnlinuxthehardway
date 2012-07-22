@@ -1,0 +1,230 @@
+\documentclass[utf8]{beamer}
+\usepackage{amsmath}
+%Zeichnen
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows,matrix,positioning,snakes,patterns,fadings,trees,shapes,mindmap}
+
+\title{Learn Linux the Hard Way}
+\author{Christian Hundt, Moritz Schlarb}
+\institute{JGU}
+\usetheme{CambridgeUS}
+\begin{document}
+
+\begin{frame}
+\tikzfading[name=fade outside,
+           left color=transparent!0,
+           right color=transparent!100,
+           middle color=transparent!50]
+\begin{tikzpicture}[remember picture,overlay]
+  \node[yshift=-3.5cm,xshift=9.5cm] at (current page.north west) {%
+    \begin{tikzpicture}
+        \definecolor{unired}{rgb}{0.7568, 0, 0.176}
+        \draw (0.3,2) node[right]{\includegraphics[scale=0.2]{logo}};
+        \draw[fill,
+              pattern color=black, 
+              path fading=fade outside] (4.4,2.15) rectangle (11,1.85);
+        \draw (2.6,2.65) node [right] {\begin{huge}
+           \textbf{\textsf{Learn Linux }}\end{huge}};
+        \draw (17.3,1.4) node [left] {\textsf{Dipl.- Phys. Ch. Hundt}};
+        \draw (4.7,1.25) node [right] {\begin{Huge}\textbf{\textsf{The Hard Way}}\end{Huge}};
+    \end{tikzpicture}
+    
+   };
+ \end{tikzpicture}
+ 
+ \begin{center}
+ \vspace{28pt}
+ \end{center}
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[yshift=-7.7cm,xshift=5.9cm] at (current page.north west) {
+\includegraphics[scale=0.9]{uni.pdf}};
+\end{tikzpicture}
+\end{center} 
+ 
+\end{frame}
+
+\begin{frame}
+\frametitle{Beliebiges}
+
+\begin{columns}
+  \column{.66\textwidth}
+    \begin{block}{}
+      \begin{itemize}
+      \item Veranstaltungshomepage: https://github.com/joguinf/learnlinuxthehardway/wiki/
+      \item Mailingliste: learnlinuxthehardway@lists.uni-mainz.de \\
+          Archiv, RSS-Feeds, Anmeldung, Abmeldung: https://lists.uni-mainz.de/sympa/info/learnlinuxthehardway
+      \item \LaTeX{}-Dokumente gemeinsam erstellen: http://writelatex.com/
+      \end{itemize}
+    \end{block}
+    \begin{block}{}
+      \begin{itemize}
+      \item Cowsay
+      \end{itemize}
+    \end{block}
+  \column{.33\textwidth}
+    \hfill
+    \includegraphics[scale=0.2]{larry_the_cow-full.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Gentoo}
+
+\begin{columns}
+  \column{.66\textwidth}
+    \begin{block}{}
+      \begin{itemize}
+      \item www.gentoo.org
+      \item Source-Distribution (keine vorkompilierten Binärpakete)
+      \item Modular, Customizable, Tweakable
+      \item 
+      \end{itemize}
+    \end{block}
+  \column{.33\textwidth}
+    \hfill
+    \includegraphics[scale=0.2]{Gentoo_logo.png}
+\end{columns}
+
+\end{frame}
+
+\section{Themengebiete}
+
+\begin{frame}
+\frametitle{Themen}
+\framesubtitle{Basissystem}
+
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{Basissystem I}
+  \begin{itemize}
+  \item Installationsmedium (Live-CD)
+  \item Partitionierung, Wahl des Dateisystems (\texttt{ext}, \texttt{jfs}, \texttt{xfs}, \texttt{btrfs})
+  \item \texttt{wget} und \texttt{tar} für das Stage3-Archiv
+  \item \texttt{chroot}
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{Basissystem II}
+  \begin{itemize}
+  \item Portage
+  \item \texttt{/etc/make.conf} und \texttt{/etc/portage/}
+  \item Der Kernel - Manuell vs. Genkernel
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Themen}
+\framesubtitle{Desktop}
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{Desktop}
+  \begin{itemize}
+  \item Enlightenment, Xfce, Fluxbox
+  \item Verschlüsselung des Heimatverzeichnisses
+  \item Conky
+  \item Eclipse
+  \item Gaming
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{Development}
+  \begin{itemize}
+  \item Makefiles
+  \item SWIG
+  \item Ebuilds
+  \item Git, SVN
+  \item IRC, Mailinglisten
+  \vspace{25pt}
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Themen}
+\framesubtitle{Server}
+
+\begin{block}{Administration}
+  \begin{itemize}
+  \item SSH, SCP
+  \item Screen
+  \item Bash, Z-Shell
+  \item Cron, Syslog
+  \end{itemize}
+\end{block}
+
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{NAS}
+  \begin{itemize}
+  \item RAID
+  \item LUKS
+  \item Samba
+  \item NFS
+  \item rsync
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{WWW}
+  \begin{itemize}
+  \item LAMP (Apache, PHP, MySQL)
+  \item Wordpress
+  \item FTP
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Themen}
+\framesubtitle{}
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{Scientific Computing}
+  \begin{itemize}
+  \item MPI
+  \item Cuda
+  \item NumPy, SciPy
+  \item GNUPlot
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{}
+  \begin{itemize}
+      \item
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+
+\section{Literatur}
+
+\begin{frame}
+\frametitle{Literatur}
+
+\begin{block}{Gentoo}
+  \begin{itemize}
+  \item Gentoo Handbook - http://www.gentoo.org/doc/en/handbook/
+  \item Official Gentoo Wiki - http://wiki.gentoo.org/
+  \item Inofficial Gentoo Wiki - http://en.gentoo-wiki.com/
+  \end{itemize}
+\end{block}
+\begin{block}{Linux}
+  \begin{itemize}
+  \item Kernel Newbies - http://kernelnewbies.org
+  \item Linux from Scratch - http://www.linuxfromscratch.org/
+  \item nixCraft: Linux Tips, Hacks, Tutorials - http://www.cyberciti.biz/
+  \end{itemize}
+\end{block}
+\end{frame}
+
+
+\end{document}
