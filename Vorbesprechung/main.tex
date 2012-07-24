@@ -1,0 +1,276 @@
+\documentclass[utf8]{beamer}
+\usepackage{amsmath}
+\usepackage[ngerman]{babel}
+ 
+%Zeichnen
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows,matrix,positioning,snakes,patterns,fadings,trees,shapes,mindmap}
+
+\title{Learn Linux the Hard Way}
+\author{Christian Hundt, Moritz Schlarb}
+\institute{JGU}
+\usetheme{CambridgeUS}
+\beamertemplatenavigationsymbolsempty
+
+\begin{document}
+
+\begin{frame}
+\tikzfading[name=fade outside,
+           left color=transparent!0,
+           right color=transparent!100,
+           middle color=transparent!50]
+\begin{tikzpicture}[remember picture,overlay]
+  \node[yshift=-3.5cm,xshift=6.3cm] at (current page.north west) {%
+    \begin{tikzpicture}
+        \definecolor{unired}{rgb}{0.7568, 0, 0.176}
+        \draw (0.3,2) node[right]{\includegraphics[scale=0.2]{logo}};
+        \draw[fill,
+              pattern color=black, 
+              path fading=fade outside] (4.4,2.15) rectangle (11,1.85);
+        \draw (2.6,2.65) node [right] {\begin{huge}
+           \textbf{\textsf{Learn Linux }}\end{huge}};
+        \draw (4.7,1.25) node [right] {\begin{Huge}\textbf{\textsf{The Hard Way}}\end{Huge}};
+    \end{tikzpicture}
+    
+   };
+ \end{tikzpicture}
+ 
+ \begin{center}
+ \vspace{28pt}
+ \end{center}
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[yshift=-7.7cm,xshift=5.9cm] at (current page.north west) {
+\includegraphics[scale=0.9]{uni.pdf}};
+\end{tikzpicture}
+\end{center} 
+ 
+\end{frame}
+
+\section{Organisatorisches}
+
+\begin{frame}
+  \frametitle{\insertsectionhead\ -- Veranstaltung}  
+  
+  \begin{block}{Veranstaltungshomepage}
+  \begin{center}\url{https://github.com/joguinf/learnlinuxthehardway/wiki/}\end{center}
+  \end{block}
+  
+  \begin{block}{Mailingliste (verpflichtend)}
+  \begin{center}\url{learnlinuxthehardway@lists.uni-mainz.de}\end{center}
+  \end{block}
+  
+  \begin{block}{Archiv, RSS-Feeds, Anmeldung, Abmeldung}
+  \begin{center} \url{https://lists.uni-mainz.de/sympa/info/learnlinuxthehardway} \end{center}
+  \end{block}
+  \begin{center}  
+  \includegraphics[scale=0.2]{znurt.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\insertsectionhead\ -- Scheinkriterien}
+  
+  \begin{block}{1. Seminarvortrag}
+  Der Vortrag wird frei gehalten und dauert 60 Minuten inklusive Live-Demo der behandelten Themen. Fragen über den Stoff des Vortrags hinaus vom Betreuer und vom Publikum sollten beantwortet werden können.
+  \end{block}
+  
+  \begin{block}{2. Schriftliche Ausarbeitung}
+  Die Ausarbeitung wird in \LaTeX geschrieben, umfasst mindestens 15 Seiten, zitiert {\bf veritable} Quellen und soll im Anschluss allen Teilnehmern des Seminars frei zur Verfügung gestellt werden.
+  \end{block}
+  
+ 
+ \begin{block}{3. Werkstück}
+ Das Werkstück besteht aus der virtuellen Maschine, die zum Zwecke der Bewältigung der gestellten Aufgaben vom Studenten angefertigt worden ist. Auch sie ist den Seminarteilnehmern frei zur Verfügung zu stellen.
+ \end{block}
+ 
+\end{frame}
+ 
+\begin{frame}
+  \frametitle{Gentoo -- Die Metadistribution}
+
+  \begin{columns}
+    \column{.57\textwidth}
+        \begin{itemize}
+          \item \url{http://www.gentoo.org}
+          \item Source-Distribution 
+          \item Rolling Releases
+          \item Modular, Customizable, Tweakable
+          \item Distributionsbaukasten
+          \item Hervorragende Dokumentation
+          \item Versierte und hilfsbereite Community
+          \item Ausgangspunkt für erste populäre Ports wie Mac Book Pro Retina, XBox, Wii, PS3, Gentoo BSD
+        \end{itemize}
+    \column{.43\textwidth}
+      \hfill
+      \begin{center}\includegraphics[scale=0.25]{Gentoo_logo.png}\end{center}
+  \end{columns}
+
+\end{frame}
+
+\section{Themen}
+
+\begin{frame}
+  \frametitle{\insertsectionhead\ -- Basissystem}
+  
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{Basissystem A}
+  \begin{itemize}
+    \item Installationsmethoden
+    \item Wahl der Architektur
+    \item Netzwerk einrichten, \texttt{sshd}
+    \item Partitionierung, Wahl des Dateisystems 
+    \item Entpacken des Stage3-Archivs
+    \item \texttt{chroot} -- password overwrite made easy
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{Basissystem B}
+  \begin{itemize}
+    \item Portage-Überblick
+    \item \texttt{/etc/make.conf} und \texttt{/etc/portage}
+    \item USE-Flags, CFLAGS, MAKEOPTS
+    \item Lokalisierung
+    \item \texttt{/etc/fstab}, \texttt{/etc/conf.d}
+    \item Der Kernel - manuelle Installation vs. Genkernel
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\insertsectionhead\ -- Desktop \& Development}
+  
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{Desktop}
+  \begin{itemize}
+    \item \texttt{/etc/X11/xorg.conf}
+    \item QT4 vs. GTK3 Vergleich
+    \item Enlightenment DR17, Xfce, Fluxbox, Gnome 3, KDE 4
+    \item Verschlüsselung des Heimatverzeichnisses
+    \item Eclipse Juno, Gedit, Kate
+    \item Conky, Yakuake, Guake
+    \item Spiele \& 3D-Beschleunigung:
+    Warsow, Dosbox, Wine
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{Development}
+  \begin{itemize}
+    \item Makefiles, Cmake
+    \item gcc, icc, clang
+    \item sun-jdk vs. openjdk, mono
+    \item Swig Interface Wrapper
+    \item Ebuilds schreiben
+    \item Git, SVN, gitolite, cgit
+    \item IRC, Mailinglisten
+    \item layman \& Overlays
+    \item Crosscompiling
+    \vspace{0.5\baselineskip}
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\insertsectionhead\ -- Server}
+
+\begin{block}{Administration}
+  \begin{itemize}
+    \item SSH, SCP, SFTP, SSHFS, VPN
+    \item Screen, Tmux, Rdesktop, VNC
+    \item Bash, Z-Shell, iPython
+    \item Cron, Syslog
+  \end{itemize}
+\end{block}
+
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{NAS}
+  \begin{itemize}
+    \item RAID
+    \item LUKS
+    \item Samba \& Windows 7
+    \item NFS
+    \item rsync, Unison, Sparkleshare
+  \end{itemize}
+\end{block}
+
+\column{.45\textwidth}
+\begin{block}{WWW}
+  \begin{itemize}
+    \item Apache, PHP, MySQL
+    \item Wordpress, Drupal
+    \item FTPD, IRCD
+    \item Ruby, Python, Postgresql
+    \item virtualenv und Turbogears 2
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\insertsectionhead\ -- Sonstige}
+ 
+ 
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{Scientific Computing}
+  \begin{itemize}
+    \item OpenMPI
+    \item OpenMP
+    \item Cuda SDK
+    \item BOINC
+    \item NumPy, SciPy, Octave
+    \item GNUPlot
+    \vspace{0.5\baselineskip}
+  \end{itemize}
+\end{block}
+\vspace{-10pt}
+\begin{center}\includegraphics[scale=0.25]{larry_the_cow-full.png}\end{center}
+
+\column{.45\textwidth}
+\vspace{-10pt}
+\begin{center}\includegraphics[scale=0.2]{freebsd-logo.png}\end{center}
+\vspace{-10pt}
+\begin{block}{Zusätzliche Themen}
+  \begin{itemize}
+      \item Gentoo Prefix (z.B. mit Windows als Wirtssystem)
+      \item Andere Linuxdistributionen (z.B. Kernel-Kompilieren unter Debian)
+      \item Andere Unixderivate z.B. FreeBSD, Darwin
+  \end{itemize}
+\end{block}
+\end{columns}
+
+\end{frame}
+
+\section{Literatur}
+
+\begin{frame}
+  \frametitle{\insertsectionhead}
+  \framesubtitle{}
+
+  \begin{block}{Gentoo}
+    \begin{itemize}
+      \item Gentoo Handbook: \url{http://www.gentoo.org/doc/en/handbook}
+      \item Gentoo Documentation Resources: \url{http://www.gentoo.org/doc/en/}
+      \item Official Gentoo Wiki: \url{http://wiki.gentoo.org}
+      \item Inofficial Gentoo Wiki: \url{http://en.gentoo-wiki.com}
+      \item Mailinglisten-Archiv: \url{http://www.gentoo.org/main/en/lists.xml}
+      \item Gentoo Forums: \url{http://forums.gentoo.org}
+    \end{itemize}
+  \end{block}
+  \begin{block}{Linux allgemein}
+    \begin{itemize}
+      \item Kernel Newbies: \url{http://kernelnewbies.org}
+      \item Linux from Scratch: \url{http://www.linuxfromscratch.org}
+      \item nixCraft: Linux Tips, Hacks, Tutorials: \url{http://www.cyberciti.biz}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\end{document}
