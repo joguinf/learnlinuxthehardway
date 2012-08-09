@@ -1,5 +1,10 @@
 # Learn Linux the Hard Way
 
-Planning of an university course teaching in-depth knowledge about the internals of the Linux operating system.
+Ein Seminar im Universitätsstudiengang Informatik über die Interna,
+Bedienungskonzepte und Einsatzmöglichkeiten einer modernen
+Linux-Distribution.
 
-For information about the course and the course material, see the [Wiki](https://github.com/joguinf/learnlinuxthehardway/wiki) here on Github.
+Hier finden sich nur die Informationsmaterialen (Aushänge und
+Vorbesprechungs-Folien) des Seminars, mehr Informationen über die
+angebotenen Themengebiete sowie Literaturempfehlungen finden
+sich im [Wiki](https://github.com/joguinf/learnlinuxthehardway/wiki).
