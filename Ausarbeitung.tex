@@ -1,0 +1,167 @@
+%Dokumententyp
+\documentclass[12pt, a4paper, twoside, headsepline]{scrartcl}
+
+%Satzspiegel und Geometrie
+\usepackage{geometry}
+\geometry{a4paper, portrait, includeheadfoot, ignoreall, heightrounded, top=4cm, bottom=4cm, twoside, bindingoffset=5mm, marginparwidth=0pt}
+
+
+%Kopf- und Fusszeilen
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\ihead{\rightmark}
+\chead{}
+\ohead{\leftmark}
+% \ifoot{untenlinks}
+% \cfoot{untenmitte}
+% \ofoot{untenrechts}
+
+%Zeichenkodierung und Umlaute
+\usepackage[utf8]{inputenc}                
+\usepackage[T1]{fontenc}             
+
+%Deutsche Rechtschreibung
+\usepackage[ngerman]{babel}              
+\usepackage[babel]{csquotes}
+
+%Graphikunterstützung
+\usepackage{graphicx}                          
+
+%Zeichnen
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows,matrix,positioning,snakes,patterns,fadings,trees,shapes,mindmap}
+
+%Mathematik
+\usepackage{amsmath}                          
+\usepackage{amsthm}                           
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+
+\begin{document}
+
+% Titel
+
+\pagenumbering{roman}
+\thispagestyle{plain}
+
+\begin{titlepage}
+  \parindent0pt
+  \vglue\fill
+
+{\raggedright\Large\bfseries
+Lorem Ipsum -- eine Leseprobe\\[-3pt]}
+  \rule{\textwidth}{1pt}\\
+  {\raggedleft
+   Seminararbeit im Schwerpunkt Betriebssysteme -- 
+    \textbf{Larry the Cow}\\
+    \itshape Februar 2013\\%
+  } 
+  
+  \vglue\fill\vglue\fill
+  {\centering \Large\bfseries Institut für Informatik\\}
+  {\centering Staudingerweg 9, 55128 Mainz, Germany\\}
+  {\centering Johannes-Gutenberg-Universität Mainz\\}
+ \vspace*{-0.5cm}
+ {\centering\includegraphics[scale=1.2]{media/uni}\\}
+\end{titlepage}
+\thispagestyle{plain}
+
+\pagenumbering{arabic}
+\newpage
+
+% END Titel
+
+\tableofcontents
+\newpage
+
+\section{Zitate und Mathematik}
+
+Lorem ipsum\cite{zfsbsd} dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam\cite{zfsrel} erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimatAt vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+\begin{align}
+H: \mathrm T^\ast \mathcal Q \rightarrow  \mathbb R^+ \cup \{0\} \, , \, (q,p) \mapsto \frac{p^2}{2m} + \frac{m \omega^2}{2} q^2
+\end{align}
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+
+\section{Vektorgraphiken}
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+\begin{figure}[h!]
+ \centering
+ \begin{tikzpicture}
+  \path[mindmap,concept color=black,text=white]
+    node[concept] {Computer Science}
+    [clockwise from=0]
+    child[concept color=green!50!black] {
+      node[concept] {practical}
+      [clockwise from=90]
+      child { node[concept] {algorithms} }
+      child { node[concept] {data structures} }
+      child { node[concept] {pro\-gramming languages} }
+      child { node[concept] {software engineer\-ing} }
+    }  
+    child[concept color=blue] {
+      node[concept] {applied}
+      [clockwise from=-30]
+      child { node[concept] {databases} }
+      child { node[concept] {WWW} }
+    }
+    child[concept color=red] { node[concept] {technical} }
+    child[concept color=orange] { node[concept] {theoretical} };
+ \end{tikzpicture}
+ \caption{TIKZ at its best!}
+\end{figure}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+\section{Externe Graphiken und Unterabschnitte}
+
+Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+
+\subsection{Unterabschnitt}
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[scale=0.5]{media/logo.pdf}
+ \caption{Ein tolles Logo.}
+\end{figure}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+
+\begin{appendix}
+\section{Anhang 1}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+
+\begin{figure}[h!]
+\tikzfading[name=fade outside,
+           left color=transparent!80,
+           right color=transparent!80,
+           middle color=transparent!0]
+ \centering
+ \begin{tikzpicture}
+	 \draw[->] (-4,0)--(4,0);
+     \draw    (4.2,0) node {$\boldsymbol e_1$};
+     \draw[dashed,color=blue!40!black,thick] (-2,0)--(-2,1);
+	 \draw[dashed,color=blue!40!black,thick] (2,0)--(2,1);
+     \draw (-2,-0.2) node {$0$};
+     \draw (+2,-0.2) node {$a$};
+	 \draw[color=white,pattern color=red!40!black,
+	           pattern=north east lines,opacity=0.3] 	(-2,0) -- (2,0) -- (2,0.75) --(-2,0.75) -- cycle;  
+	 \draw[color=white,pattern color=green!40!black,
+	           pattern=north west lines,opacity=0.3,
+	           path fading=fade outside] 	(-4,0) -- (4,0) -- (4,-0.75) --(-4,-0.75) -- cycle;  
+     \draw[dashed,color=blue!40!black] (-2,1.2) node {Platte 1};
+	 \draw[dashed,color=blue!40!black] (2,1.2)  node {Platte 2};
+     \draw[color=red!40!black] (0,0.39) node {$[0,a] \subset \mathbb R$};
+	 \draw[color=green!40!black] (0,-0.39) node {$\mathbb R$};
+ \end{tikzpicture}
+ \caption{Verläufe und Transparenz mit TIKZ.}
+\end{figure}
+
+\end{appendix}
+\begin{thebibliography}{100}
+\bibitem{zfsbsd}
+P. J. Dawidek, {\em Porting the ZFS file system to the FreeBSD operating system}, AsiaBSDCon 2007
+\bibitem{zfsrel}
+A. Kadav, A. Rajimwale {\em Reliability Analysis of ZFS}, Proceedings of the BS Conference  2007
+\end{thebibliography}
+\end{document}
