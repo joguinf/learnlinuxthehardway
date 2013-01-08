@@ -8,16 +8,10 @@
 %~ \usepackage{cite}
 \usepackage{hyperref}
 %~ \usepackage{color}
-%~ \usepackage{listings}
-%~ \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 
 \usepackage{multirow}
-
-%~ because tikz rocks
-%~ \usepackage{tikz}
-%~ \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
 \usepackage{MyriadPro}
 \usepackage{MinionPro}
@@ -54,8 +48,8 @@
 \endgroup
 }
 
-\title[Server NAS]{Server -- NAS}
-\subtitle[Kurzform]{Private Sicherheitskopien vor Erdbeben, \\ kosmischer Hintergrundstrahlung und dem BKA schützen}
+\title[Server NAS]{Server --- NAS}
+\subtitle{Private Sicherheitskopien vor Erdbeben, \\ kosmischer Hintergrundstrahlung und dem BKA schützen}
 \author[Moritz Schlarb]{Moritz Schlarb}
 \institute[JGU Mainz]{Institut für Informatik\\ Johannes Gutenberg-Universität Mainz}
 \date[08.01.2013]{08. Januar 2013}
@@ -111,19 +105,6 @@
 
 \subsection{KVM}
 
-\begin{frame}{QEMU}
-\centering\includegraphics[width=0.2\columnwidth]{qemu-logo}
-
-\begin{block}{}
-  \begin{itemize}
-    \item ``Quick Emulator'' \mynote{Quick:}{not}
-    \item Kann verschiedene Prozessorarchitekturen emulieren: \\
-		i386, x86\_64, arm, mips, ppc, \ldots{} \note{\texttt{\$ emerge -pv qemu}\\ \texttt{\$ equery u qemu}}
-    \item Emulator für Geräte (Festplatten, Netzwerk-, Sound- und Grafikkarten)
-  \end{itemize}
-\end{block}
-\end{frame}
-
 \begin{frame}{KVM}{Kernel-based Virtual Machine}
 \centering\includegraphics[width=0.5\columnwidth]{kvmbanner-logo2}
 
@@ -142,6 +123,7 @@
 }
 \texttt{TUN}, \texttt{BRIDGE}, \texttt{VHOST\_NET}
 }
+	\item Im Linux-Kernel seit 2.6.20
     \item Paravirtualisierung durch Virtio
 		\mynote{Virtio:}{Guest-Kernel\\ \texttt{\scriptsize%
 \$ grep VIRTIO /usr/src/linux/.config \\
@@ -161,27 +143,33 @@ CONFIG\_VIRTIO\_BALLOON=y\\
 \end{block}
 \end{frame}
 
-\subsection{libvirt}
+\begin{frame}{QEMU}
+\centering\includegraphics[width=0.3\columnwidth]{qemu-logo}
 
-\begin{frame}{libvirt}
-\centering\includegraphics[width=0.5\columnwidth]{Libvirt_logo}
-
-\begin{columns}
-\column{\textwidth}
 \begin{block}{}
+  \begin{itemize}
+    \item ``Quick Emulator'' \mynote{Quick:}{not}
+    \item Kann verschiedene Prozessorarchitekturen emulieren: \\
+		i386, x86\_64, arm, mips, ppc, \ldots{} \note{\texttt{\$ emerge -pv qemu}\\ \texttt{\$ equery u qemu}}
+    \item Emulator für Geräte (Festplatten, Netzwerk-, Sound- und Grafikkarten)
+  \end{itemize}
+\end{block}
+\end{frame}
+
+\subsection{libvirt \& virt-manager}
+
+\begin{frame}{libvirt \& virt-manager}
+
+\begin{block}{libvirt}
+\centering\includegraphics[height=0.2\textheight]{Libvirt_logo}
   \begin{itemize}
 	\item Bibliothek/API/Daemon zur Konfiguration/Steuerung von verschiedenen Virtualisierungsumgebungen
   \end{itemize}
 \note{\texttt{\$ emerge -pv libvirt}\\ \texttt{\$ equery u libvirt}}
 \end{block}
-\end{columns}
-\end{frame}
 
-\subsection{virt-manager}
-
-\begin{frame}{virt-manager}
-\centering\includegraphics[width=0.5\columnwidth]{virt-manager_logo}
-\begin{block}{}
+\begin{block}{virt-manager}
+\centering\includegraphics[height=0.11\textheight]{virt-manager_logo}
   \begin{itemize}
     \item Grafisches Frontend für libvirt
     \item Remote-Zugriff auf verschiedene libvirt-Instanzen
@@ -193,12 +181,14 @@ CONFIG\_VIRTIO\_BALLOON=y\\
 
 \demo{}
 
-\section{Partitionierung like a Boss}
+\section{Platten und Partitionen}
 
 \subsection{RAID}
 
 \begin{frame}{RAID}{Redundant Array of Independent/Inexpensive Disks}
 \begin{block}{RAID}
+Erhöhung von Ausfallsicherheit/Performance von Festplatten
+
 \begin{itemize}
 	\item Hardware-RAID
 	\item Host-RAID
@@ -236,7 +226,6 @@ CONFIG\_VIRTIO\_BALLOON=y\\
 \column{.5\textwidth}<1->
 \centering\includegraphics[width=0.9\columnwidth,height=0.44\textheight,keepaspectratio=true]{/RAID_01}
 %~ \column{.5\textwidth}
-%~ \centering\includegraphics[width=0.9\columnwidth,height=0.33\textheight,keepaspectratio=true]{/RAID_01-3}
 \end{columns}
 %~ \end{block}
 %~ \begin{block}{\small RAID 1+0}
@@ -275,6 +264,7 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 \demo{}
 \note{
 \texttt{\scriptsize%
+\\\$ emerge -pv mdadm
 \\\$ ls -l /dev/vd*
 \\\$ fdisk -l /dev/vdb
 \\\$ cat /proc/mdstat
@@ -294,8 +284,10 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 
 \begin{frame}{LVM}{Logical Volume Manager}
 \begin{block}{LVM}
+Dynamische Partitionierung über Festplattengrenzen hinweg
+
 \begin{itemize}
-	\item Physical Volumne
+	\item Physical Volume
 	\item Volume Group
 	\item Logical Volume
 \end{itemize}
@@ -307,8 +299,6 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 	\centering\colorbox{white}{\includegraphics[height=0.9\textheight]{LVM}}
 
    	\flushleft{\tiny
-   	%~ File:Unix history-simple.svg, Revision as of 17:10, 23 June 2012 --
-   	%~ Source: Wikimedia Commons, License: CC-BY-SA-3.0\\
    	URL: \url{http://www.helios.de/support/manuals/vsa-e/volume-management.html}
    	}
 %~ \end{block}
@@ -319,8 +309,6 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 	\centering\colorbox{white}{\includegraphics[height=0.9\textheight]{LVM-RAID}}
 
    	\flushleft{\tiny
-   	%~ File:Unix history-simple.svg, Revision as of 17:10, 23 June 2012 --
-   	%~ Source: Wikimedia Commons, License: CC-BY-SA-3.0\\
    	URL: \url{http://www.helios.de/support/manuals/vsa-e/volume-management.html}
    	}
 %~ \end{block}
@@ -329,6 +317,7 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 \demo{}
 \note{
 \texttt{\scriptsize%
+\\\$ emerge -pv lvm2
 \\\$ mdadm -\--create /dev/md1 -\--level=1 -\--raid-devices=2 /dev/vd[bc]1
 \\\$ mdadm -\--create /dev/md2 -\--level=1 -\--raid-devices=2 /dev/vd[de]1
 \\\$ mdadm -\--create /dev/md3 -\--level=1 -\--raid-devices=2 /dev/vd[fg]1
@@ -364,16 +353,16 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 \begin{frame}{LUKS}{Linux Unified Key Setup}
 \centering\includegraphics[width=0.33\columnwidth]{luks-logo}
 \begin{block}{LUKS}
+Festplattenverschlüsselung mit Header
+
 \begin{itemize}
-	\item dm-crypt
-	\item cryptsetup
+	\item dm-crypt (Kerneltreiber)
+	\item cryptsetup (Userspace-Tool)
 \end{itemize}
 \end{block}
 \end{frame}
 
 \begin{frame}[plain]%{LUKS}
-%~ \begin{block}{LUKS}
-	%~ \centering\colorbox{white}{\includegraphics[width=\textwidth]{keys_and_pw_with_luks}}
 
 \mynote{PBKDF2:}{Password-Based Key Derivation Function}
 
@@ -389,19 +378,17 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 \note{Ohne LUKS keine plausible deniability}
 
    	\flushleft{\tiny
-   	%~ File:Unix history-simple.svg, Revision as of 17:10, 23 June 2012 --
-   	%~ Source: Wikimedia Commons, License: CC-BY-SA-3.0\\
    	URL: \url{http://www.markus-gattol.name/ws/dm-crypt_luks.html}
    	}
-%~ \end{block}
 \end{frame}
 
 \demo{}
 \note{
 \texttt{\scriptsize%
+\\\$ emerge -pv cryptsetup
 \\\$ mdadm -\--create /dev/md127 -\--level=6 -\--raid-devices=6 /dev/vd[bcdefg]1
-\\\$ cryptsetup luksFormat -q -c aes-xts-plain -s 256 /dev/md127 \~/keyfile
-\\\$ cryptsetup luksOpen -d \~/keyfile /dev/md127 enc
+\\\$ cryptsetup luksFormat -q -c aes-xts-plain -s 256 /dev/md127 /root/keyfile
+\\\$ cryptsetup luksOpen -d /root/keyfile /dev/md127 enc
 \\\$ cat /etc/conf.d/dmcrypt
 \\rc\_before="lvm"
 \\target=enc
@@ -420,7 +407,15 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 \begin{block}{Features}
 \begin{itemize}
 	\item Integrierte RAID- und LVM-Funktionen
-	\item Sicherstellung von (Nutz-)Datenintegrität\mynote{avoid data corruption:}{self-healing}
+	\item Sicherstellung von (Nutz-)Datenintegrität
+		\mynote{avoid data corruption:}{self-healing}
+		\mynote{Uncorrectable bit error rates:}{
+1 in 10\textsuperscript{14} bits ($\sim$12TB) for desktop-class drives,
+1 in 10\textsuperscript{15} bits ($\sim$120TB) for enterprise-class drives (allegedly),
+Bad sector every 8-20TB in practice (desktop and enterprise),
+Drive capacities doubling every 12-18 months,
+Number of drives per deployment increasing,
+$\rightarrow$ Rapid increase in error rates\par}
 	\item Scrubbing
 	\item Copy-on-write
 	\begin{itemize}
@@ -433,29 +428,49 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 \mynote{write hole:}{Zuerst werden Daten geschrieben, dann Paritätsbit}
 \end{block}
 
+\begin{block}{Historie}
+\begin{itemize}
+	\item Solaris 10 $\rightarrow$ OpenSolaris $\rightarrow$ OpenIndiana (illumos) $\rightarrow$ FreeBSD
+\end{itemize}
+\end{block}
+%~ http://hub.opensolaris.org/bin/download/Community+Group+zfs/docs/zfslast.pdf
+
 \end{frame}
 
 \begin{frame}{ZFS}{ZFS on Linux}
 
-
-\begin{alertblock}{Don't try this at home!}
-	ZFS on Linux is experimental software!
+\begin{alertblock}{Don't try this at home!}<1->
+	ZFS on Linux is experimental software! (leider)
 \end{alertblock}
 
-\begin{block}{}
+\begin{block}{Kernel-Treiber}<2->
 	\url{http://zfsonlinux.org/}
 
 	%~ \url{https://mthode.org/posts/2012/Dec/gentoo-hardened-zfs-rootfs-with-dm-cryptluks-updated-2012-12-12/}
 \end{block}
 
+\begin{block}{FUSE}<2->
+	\url{http://zfs-fuse.net/}
+\end{block}
+
+%~ \begin{block}{Gentoo $\heartsuit$}<3->
+	%~ \url{http://wiki.gentoo.org/wiki/ZFS}
+%~ \end{block}
+
 \end{frame}
 
 \demo{}
 \note{
+\texttt{\scriptsize%
+\\\$ cat /etc/portage/package.accept\_keywords
+\\\$ emerge -pv zfs zfs-kmod spl
+\\\$ rc-update add zfs boot
+}\\ \textbackslash{}o/}
+\note{
 \texttt{\scriptsize%{}
 \\\$ for i in b c d e f g; do
-\\\$ cryptsetup luksFormat -q -c aes-xts-plain -s 256 /dev/vd\$\{i\}1 \~/keyfile
-\\\$ cryptsetup luksOpen -d \~/keyfile /dev/vd\$\{i\}1 \$\{i\}
+\\\$ cryptsetup luksFormat -q -c aes-xts-plain -s 256 /dev/vd\$\{i\}1 /root/keyfile
+\\\$ cryptsetup luksOpen -d /root/keyfile /dev/vd\$\{i\}1 \$\{i\}
 \\\$ done
 \\\$ zpool create tank raidz2 /dev/mapper/[bcdefg]
 \\\$ zfs create -o mountpoint=/mnt/storage/public tank/public
@@ -475,69 +490,110 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 %~ \column{.45\textwidth}
 \begin{block}{}
   \begin{itemize}
-    \item Erweiterung von SMB (Server Message Block) -- Namensgeber für Samba
+	\item Datei- und Druckerfreigabe
+    \item Erweiterung von SMB (Server Message Block)
+	  \begin{itemize}
+		\item Freie Server-Implementierung Samba
+	  \end{itemize}
+    \item SMB2 (Windows Vista/Windows Server 2008) --- ab Samba 3.5
+    \item SMB 2.1 (Windows 7/Windows Server 2008 R2)
+    \item SMB 3 (Windows 8/Windows Server 2012)
   \end{itemize}
 \end{block}
 %~ \end{columns}
 
 \end{frame}
+
+\demo{}
+\note{
+\texttt{\scriptsize%
+\\\$ emerge -pv samba
+\\\$ cat /etc/samba/smb.conf
+\\map to guest = bad user
+\\guest account = nobody
+\\\$ useradd -\--no-create-home -\--shell /bin/false <username>
+\\\$ smbpasswd -a user
+}\\ \textbackslash{}o/}
 
 \subsection{NFS}
 
 \begin{frame}{NFS}{Network File System}
 \begin{block}{}
   \begin{itemize}
-    \item NFSv3
-    \item NFSv4
+    \item NFSv3 (1995)
+    \item NFSv4 (2000)
+    \item UNIX-spezifisch
   \end{itemize}
 \end{block}
 \end{frame}
 
-%~ \section{Blick über den Tellerrand}
-%~
-%~ \subsection{UNIX}
-%~
-%~ \begin{frame}[plain]%{UNIX}
+\demo{}
+\note{\texttt{\scriptsize%
+\\\$ emerge -pv nfs-utils
+\\\$ zgrep NFS /proc/config.gz
+\\CONFIG\_NFS\_FS=y
+\\CONFIG\_NFS\_V3=y
+\\CONFIG\_NFS\_V4=y
+\\CONFIG\_NFSD=y
+\\CONFIG\_NFSD\_V3=y
+\\CONFIG\_NFSD\_V4=y
+\\CONFIG\_NFS\_COMMON=y
+}
+
+\texttt{/etc/exports}, \texttt{/etc/hosts.allow} and \texttt{/etc/hosts.deny}
+
+\begin{itemize}
+	\item alle Benutzer im Netzwerk eindeutige UIDs haben (LDAP, NIS) --- Zugriffskontrolle durch reguläre Dateiberechtigungen
+	\item alle Rechner im Netzwerk zentral administriert werden --- Nutzer mit Root-Rechten können beliebige UIDs nutzen (Kerberos)
+\end{itemize}
+
+}
+
+\section*{Diverses}
+
+\subsection*{UNIX}
+
+\begin{frame}[plain]%{UNIX}
 %~ \begin{block}{UNIX Family Tree}
-	%~ \centering\colorbox{white}{\includegraphics[height=0.9\textheight]{Unix_history-simple}}
-%~
-   	%~ \flushleft{\tiny File:Unix history-simple.svg, Revision as of 17:10, 23 June 2012 --
-   	%~ Source: Wikimedia Commons, License: CC-BY-SA-3.0 \\
-   	%~ URL: \url{http://commons.wikimedia.org/w/index.php?title=File:Unix_history-simple.svg&oldid=73135501}
-   	%~ }
+	\centering\colorbox{white}{\includegraphics[height=0.9\textheight]{Unix_history-simple}}
+
+   	\flushleft{\tiny File:Unix history-simple.svg, Revision as of 17:10, 23 June 2012 --
+   	Source: Wikimedia Commons, License: CC-BY-SA-3.0 \\
+   	URL: \url{http://commons.wikimedia.org/w/index.php?title=File:Unix_history-simple.svg&oldid=73135501}
+   	}
 %~ \end{block}
-%~ \end{frame}
-%~
-%~ \subsection{Lizenzen}
-%~
-%~ \begin{frame}{GPL vs. the Rest}
-%~ \begin{columns}
-%~ \column{.45\textwidth}
-%~ \centering\includegraphics[width=0.5\columnwidth]{Official_gnu}
-%~ \column{.45\textwidth}
-%~ \centering\includegraphics[width=0.5\columnwidth]{GPLv3_Logo}
-%~ \end{columns}
-%~ \begin{columns}
-%~ \column{.45\textwidth}
-%~ \begin{block}{GPL-kompatibel}
-  %~ \begin{itemize}
-    %~ \item LGPL
-    %~ \item BSD-2, BSD-3
-    %~ \item MIT
-  %~ \end{itemize}
-%~ \end{block}
-%~ \column{.45\textwidth}
-%~ \begin{block}{Nicht GPL-kompatibel}
-  %~ \begin{itemize}
-    %~ \item BSD-4
-    %~ \item CDDL-1.0
-    %~ \item Apache-2.0
-    %~ \item MPL-2.0
-    %~ \item EPL-1.0
-  %~ \end{itemize}
-%~ \end{block}
-%~ \end{columns}
-%~ \end{frame}
+\end{frame}
+
+\subsection*{Lizenzen}
+
+\begin{frame}{GPL vs. the Rest}
+\begin{columns}
+\column{.45\textwidth}
+\centering\includegraphics[width=0.5\columnwidth]{Official_gnu}
+\column{.45\textwidth}
+\centering\includegraphics[width=0.5\columnwidth]{GPLv3_Logo}
+\end{columns}
+\begin{columns}
+\column{.45\textwidth}
+\begin{block}{GPL-kompatibel}
+  \begin{itemize}
+    \item LGPL
+    \item BSD-2, BSD-3
+    \item MIT
+  \end{itemize}
+\end{block}
+\column{.45\textwidth}
+\begin{block}{Nicht GPL-kompatibel}
+  \begin{itemize}
+    \item BSD-4
+    \item CDDL-1.0
+    \item Apache-2.0
+    \item MPL-2.0
+    \item EPL-1.0
+  \end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
 
 %~ \section{Tools}
 
@@ -552,5 +608,7 @@ RAID-Level & $n$ {\footnotesize(Anzahl Festplatten)} & $k$ {\footnotesize(Nettok
 	%~ \end{description}
 %~ \end{block}
 %~ \end{frame}
+
+\demo{}
 
 \end{document}
